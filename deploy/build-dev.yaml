@@ -6,7 +6,7 @@ steps:
 
   - id: 'Build Docker Image'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '--tag', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA', '-f', './deploy/dockerfile', './']
+    args: ['build', '--tag', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA', '-f', './deploy/Dockerfile', './']
 
   - id: 'Push Docker Image'
     name: 'gcr.io/cloud-builders/docker'
