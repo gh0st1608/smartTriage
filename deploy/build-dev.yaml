@@ -28,7 +28,7 @@ steps:
         '--platform', 'managed',
         '--region', 'us-central1',
         '--allow-unauthenticated',
-        '--project', 'test',
+        '--project', 'oval-crawler-444615-k3',
         '--set-env-vars', 'FLASK_ENV=production',
         '--service-account', '1094025365695-compute@developer.gserviceaccount.com'
       ]
