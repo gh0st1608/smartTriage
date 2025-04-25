@@ -10,10 +10,10 @@ def predict():
     try:
         data = request.json
 
-        if not data or 'Data' not in data or 'triaje' not in data['Data']:
+        if not data or 'Data' not in data or 'Triaje' not in data['Data']:
             return jsonify({"status": "error", "message": "Estructura inválida"}), 400
 
-        raw_triaje_data = data['Data']['triaje']
+        raw_triaje_data = data['Data']['Triaje']
         triaje_data = {
             snake_to_camel(k): v for k, v in raw_triaje_data.items()
         }
