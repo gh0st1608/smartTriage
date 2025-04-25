@@ -1,4 +1,4 @@
-# Usar una imagen de Python ligera
+# Usar una imagen de Python
 FROM python:3.9-alpine
 
 # Definir el directorio de trabajo
