@@ -5,7 +5,7 @@ FROM python:3.10-alpine
 WORKDIR /var/www
 
 # Copiar el contenido esencial al contenedor
-COPY requirements.txt /var/www/app/
+COPY requirements.txt /var/www/
 COPY app/ /var/www/app/
 COPY main.py /var/www/
 
