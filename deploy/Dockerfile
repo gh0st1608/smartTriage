@@ -1,19 +1,22 @@
-# Usar una imagen de Python
-FROM python:3.10-alpine
+# Imagen base ligera con Python 3.10
+FROM python:3.10-slim
 
-# Definir el directorio de trabajo
-WORKDIR /var/www
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
 
-# Copiar el contenido esencial al contenedor
-COPY requirements.txt /var/www/
-COPY app/ /var/www/app/
-COPY main.py /var/www/
-
-# Instalar dependencias
+# Copia los archivos necesarios
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Exponer el puerto en el que correrá Flask
+# Ahora copiamos el resto del código
+COPY . .
+
+# Expone el puerto de tu aplicación Flask
 EXPOSE 3333
 
-# Ejecutar la aplicación Flask
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:3333", "app.main:app"]
+# Configura variables de entorno para Flask
+ENV FLASK_APP=main.py
+ENV FLASK_ENV=production
+
+# Comando para arrancar la aplicación
+CMD ["flask", "run", "--host=0.0.0.0", "--port=3333"]

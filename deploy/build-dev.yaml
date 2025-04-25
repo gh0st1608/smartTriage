@@ -1,16 +1,21 @@
 steps:
-  - id: 'Build Application'
-    name: 'python:3.10' # especificar la versión
-    entrypoint: 'bash'
-    args: ['-c', 'pip install -r requirements.txt']
-
   - id: 'Build Docker Image'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '--tag', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA', '-f', './deploy/Dockerfile', './']
+    args:
+      [
+        'build',
+        '--tag', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA',
+        '-f', './deploy/Dockerfile',
+        '.'  # contexto desde raíz, para incluir app/, main.py, requirements.txt, etc.
+      ]
 
   - id: 'Push Docker Image'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA']
+    args:
+      [
+        'push',
+        'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA'
+      ]
 
   - id: 'Deploy to Cloud Run'
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -18,12 +23,12 @@ steps:
     args:
       [
         'run', 'deploy', 'flask-app-service',
-        '--image', 'us-east1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA',
+        '--image', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA',
         '--port', '3333',
         '--platform', 'managed',
-        '--region', 'us-east1',
+        '--region', 'us-central1',
         '--allow-unauthenticated',
-        '--project', 'my-project',
+        '--project', 'test',
         '--set-env-vars', 'FLASK_ENV=production',
         '--service-account', '1094025365695-compute@developer.gserviceaccount.com'
       ]
