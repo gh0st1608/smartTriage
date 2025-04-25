@@ -27,3 +27,7 @@ steps:
         '--set-env-vars','FLASK_ENV=production',
         '--service-account', 'my-service-account@my-project.iam.gserviceaccount.com'
       ]
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+serviceAccount: '1094025365695-compute@developer.gserviceaccount.com'
