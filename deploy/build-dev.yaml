@@ -1,6 +1,6 @@
 steps:
   - id: 'Build Application'
-    name: 'gcr.io/cloud-builders/python:3.10'  # especificar la versión
+    name: 'python:3.10' # especificar la versión
     entrypoint: 'bash'
     args: ['-c', 'pip install -r requirements.txt']
 
