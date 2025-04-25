@@ -1,6 +1,6 @@
 steps:
   - id: 'Build Application'
-    name: 'gcr.io/cloud-builders/python'
+    name: 'gcr.io/cloud-builders/python:3.10'  # especificar la versión
     entrypoint: 'bash'
     args: ['-c', 'pip install -r requirements.txt']
 
@@ -24,7 +24,7 @@ steps:
         '--region', 'us-east1',
         '--allow-unauthenticated',
         '--project', 'my-project',
-        '--set-env-vars','FLASK_ENV=production',
+        '--set-env-vars', 'FLASK_ENV=production',
         '--service-account', 'my-service-account@my-project.iam.gserviceaccount.com'
       ]
 
