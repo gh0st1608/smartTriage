@@ -6,11 +6,11 @@ steps:
 
   - id: 'Build Docker Image'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '--tag', 'us-east1-docker.pkg.dev/my-project/dev-app-artifact-registry/flask-app:$COMMIT_SHA', '-f', './deploy/dockerfile', './']
+    args: ['build', '--tag', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA', '-f', './deploy/dockerfile', './']
 
   - id: 'Push Docker Image'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-east1-docker.pkg.dev/my-project/dev-app-artifact-registry/flask-app:$COMMIT_SHA']
+    args: ['push', 'us-central1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA']
 
   - id: 'Deploy to Cloud Run'
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -18,14 +18,14 @@ steps:
     args:
       [
         'run', 'deploy', 'flask-app-service',
-        '--image', 'us-east1-docker.pkg.dev/my-project/dev-app-artifact-registry/flask-app:$COMMIT_SHA',
+        '--image', 'us-east1-docker.pkg.dev/oval-crawler-444615-k3/medical-apiscore/msa-smart-triage-img:$COMMIT_SHA',
         '--port', '3333',
         '--platform', 'managed',
         '--region', 'us-east1',
         '--allow-unauthenticated',
         '--project', 'my-project',
         '--set-env-vars', 'FLASK_ENV=production',
-        '--service-account', 'my-service-account@my-project.iam.gserviceaccount.com'
+        '--service-account', '1094025365695-compute@developer.gserviceaccount.com'
       ]
 
 options:
